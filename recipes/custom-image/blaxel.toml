@@ -1,0 +1,7 @@
+name = "agent-lifecycle-runtime"
+type = "sandbox"
+description = "Optional custom runtime for the Agent Drive lifecycle cookbook"
+
+[runtime]
+generation = "mk3"
+memory = 2048

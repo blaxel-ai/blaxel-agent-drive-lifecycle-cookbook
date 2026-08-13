@@ -1,0 +1,46 @@
+{
+  "name": "@blaxel-ai/blaxel-agent-drive-lifecycle-cookbook",
+  "version": "0.1.0",
+  "private": true,
+  "license": "MIT",
+  "type": "module",
+  "description": "A bounded Blaxel Sandbox and Agent Drive lifecycle cookbook.",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "build": "npm run clean && tsc -p tsconfig.json --noEmit",
+    "check": "npm run build && npm test",
+    "check:format": "prettier --check .",
+    "check:links": "node scripts/check-links.mjs",
+    "check:polish": "npm run check:format && npm run check:links",
+    "clean": "node scripts/clean.mjs",
+    "example": "tsx examples/run.ts",
+    "format": "prettier --write .",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:live": "RUN_BLAXEL_LIVE_TESTS=1 vitest run tests/live.test.ts"
+  },
+  "dependencies": {
+    "@blaxel/core": "0.3.11",
+    "dotenv": "^17.4.2"
+  },
+  "devDependencies": {
+    "@types/node": "^26.2.0",
+    "prettier": "^3.6.2",
+    "tsx": "^4.23.12",
+    "typescript": "^7.0.2",
+    "vitest": "^4.1.10"
+  },
+  "overrides": {
+    "js-yaml": "^4.3.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/blaxel-ai/blaxel-agent-drive-lifecycle-cookbook.git"
+  },
+  "homepage": "https://github.com/blaxel-ai/blaxel-agent-drive-lifecycle-cookbook#readme",
+  "bugs": {
+    "url": "https://github.com/blaxel-ai/blaxel-agent-drive-lifecycle-cookbook/issues"
+  }
+}

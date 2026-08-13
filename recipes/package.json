@@ -1,0 +1,36 @@
+{
+  "name": "@blaxel-ai/blaxel-agent-drive-lifecycle-recipes",
+  "version": "0.1.0",
+  "private": true,
+  "license": "MIT",
+  "type": "module",
+  "description": "Optional application hardening recipes for the Agent Drive lifecycle cookbook.",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "check": "npm run build && npm test",
+    "example:combined": "tsx combined-reference/run.ts",
+    "reconcile": "tsx cleanup-reconciliation/run.ts",
+    "test": "vitest run",
+    "test:live:image": "RUN_BLAXEL_CUSTOM_IMAGE_TESTS=1 vitest run custom-image/live.test.ts",
+    "test:live:model": "RUN_BLAXEL_MODEL_LIVE_TESTS=1 vitest run model-orchestration/live.test.ts",
+    "test:live:network": "RUN_BLAXEL_NETWORK_TESTS=1 vitest run network-and-credentials/live.test.ts"
+  },
+  "dependencies": {
+    "@opentelemetry/api": "^1.9.1",
+    "@opentelemetry/exporter-metrics-otlp-http": "^0.221.0",
+    "@opentelemetry/exporter-trace-otlp-http": "^0.221.0",
+    "@opentelemetry/sdk-node": "^0.221.0",
+    "dotenv": "^17.4.2",
+    "pg": "^8.23.0"
+  },
+  "devDependencies": {
+    "@types/node": "^26.2.0",
+    "@types/pg": "^8.21.0",
+    "tsx": "^4.23.12",
+    "typescript": "^7.0.2",
+    "vitest": "^4.1.10"
+  }
+}
