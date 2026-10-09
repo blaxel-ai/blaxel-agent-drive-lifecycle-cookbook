@@ -35,7 +35,7 @@
   "overrides": {
     "js-yaml": "^4.3.1",
     "toml": "4.2.0",
-    "fast-uri": "3.1.7",
+    "fast-uri": "3.1.8",
     "qs": "6.16.0"
   },
   "repository": {
