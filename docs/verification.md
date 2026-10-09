@@ -20,8 +20,8 @@ These checks cover the TypeScript build, core and recipe unit tests, formatting,
 
 | Check                             | Result                                        |
 | --------------------------------- | --------------------------------------------- |
-| Core build and unit tests         | Passed: 22 tests; 2 opt-in live tests skipped |
-| Recipe build and unit tests       | Passed: 17 tests; 3 opt-in live tests skipped |
+| Core build and unit tests         | Passed: 26 tests; 2 opt-in live tests skipped |
+| Recipe build and unit tests       | Passed: 19 tests; 3 opt-in live tests skipped |
 | Formatting and local links        | Passed                                        |
 | Core and recipe dependency audits | Passed: 0 known vulnerabilities               |
 
