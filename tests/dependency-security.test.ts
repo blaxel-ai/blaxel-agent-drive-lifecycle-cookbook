@@ -6,6 +6,10 @@ const expressRequire = createRequire(coreRequire.resolve("express"));
 const Ajv = coreRequire("ajv");
 const toml = coreRequire("toml");
 const qs = expressRequire("qs");
+// ip-address reaches the SDK through @modelcontextprotocol/sdk -> express-rate-limit.
+const { Address4, Address6 } = createRequire(
+  require.resolve("express-rate-limit"),
+)("ip-address");
 
 describe("security regressions through SDK dependency resolution", () => {
   it("rejects malformed hosts and ports through the actual Ajv resolver", () => {
@@ -39,5 +43,17 @@ describe("security regressions through SDK dependency resolution", () => {
       /array limit exceeded/i,
     );
     expect(qs.parse("a[]=1,2,3", options).a).toEqual([["1", "2", "3"]]);
+  });
+
+  it("never matches an address against a subnet of the other family (GHSA-j6r3-76f7-8jcv)", () => {
+    expect(new Address6("a00::1").isInSubnet(new Address4("10.0.0.0/8"))).toBe(
+      false,
+    );
+    expect(new Address4("32.0.0.1").isInSubnet(new Address6("2000::/3"))).toBe(
+      false,
+    );
+    expect(
+      new Address4("10.1.2.3").isInSubnet(new Address4("10.0.0.0/8")),
+    ).toBe(true);
   });
 });
