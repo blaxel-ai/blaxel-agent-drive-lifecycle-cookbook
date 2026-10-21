@@ -17,7 +17,9 @@ function loadFollowRedirects() {
   const dir = (req.resolve.paths("axios") ?? [])
     .map((base) => join(base, "axios"))
     .find((c) => existsSync(join(c, "package.json")));
-  if (dir) req = createRequire(join(realpathSync(dir), "package.json"));
+  // Fail rather than fall back: a copy outside axios would prove nothing.
+  if (!dir) throw new Error("cannot resolve axios from this project");
+  req = createRequire(join(realpathSync(dir), "package.json"));
   return req("follow-redirects") as { http: typeof http };
 }
 
