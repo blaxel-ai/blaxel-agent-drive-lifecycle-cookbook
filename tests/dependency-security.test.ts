@@ -4,7 +4,6 @@ import { describe, expect, it } from "vitest";
 const coreRequire = createRequire(require.resolve("@blaxel/core"));
 const expressRequire = createRequire(coreRequire.resolve("express"));
 const Ajv = coreRequire("ajv");
-const toml = coreRequire("toml");
 const qs = expressRequire("qs");
 // ip-address reaches the SDK through @modelcontextprotocol/sdk -> express-rate-limit.
 const { Address4, Address6 } = createRequire(
@@ -30,11 +29,10 @@ describe("security regressions through SDK dependency resolution", () => {
     );
   });
 
-  it("rejects deep TOML with a catchable parser error", () => {
-    expect(() =>
-      toml.parse(`x = ${"[".repeat(600)}0${"]".repeat(600)}`),
-    ).toThrow(/maximum nesting depth/i);
-    expect(toml.parse("answer = 42").answer).toBe(42);
+  it("no longer ships toml through the SDK (GHSA-9j65-hcg3-gc64, GHSA-9qmh-m7c6-f92p)", () => {
+    expect(() => coreRequire.resolve("toml")).toThrow(/cannot find module/i);
+    const { parse } = coreRequire("smol-toml");
+    expect(parse("answer = 42").answer).toBe(42);
   });
 
   it("enforces comma array limits through Express-resolved qs", () => {
@@ -43,6 +41,14 @@ describe("security regressions through SDK dependency resolution", () => {
       /array limit exceeded/i,
     );
     expect(qs.parse("a[]=1,2,3", options).a).toEqual([["1", "2", "3"]]);
+  });
+
+  it("stringifies comma arrays whose elements carry a non-callable toString (GHSA-6pq8-jhm2-2vcw)", () => {
+    for (const toString of [1, "x", {}]) {
+      expect(() =>
+        qs.stringify({ a: [{ toString }] }, { arrayFormat: "comma" }),
+      ).not.toThrow();
+    }
   });
 
   it("never matches an address against a subnet of the other family (GHSA-j6r3-76f7-8jcv)", () => {
