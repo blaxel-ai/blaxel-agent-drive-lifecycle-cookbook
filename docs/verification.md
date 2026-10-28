@@ -1,6 +1,6 @@
 # Verification
 
-Automated checks last verified: October 28, 2026, on Node.js 20.20.0 and 22.22.0 (npm 10), after the `@blaxel/core` 0.3.32 / qs 6.16.1 / fast-uri 3.1.9 dependency update.
+Automated checks last verified: October 28, 2026, on Node.js 20.20.0 and 22.22.0 (npm 10), after the `@hono/node-server` 2.1.5 dependency update.
 
 Live check last verified: August 12, 2026, on Node.js 24.18.0 with `@blaxel/core` 0.3.11. It was not rerun for the 0.3.32 update.
 
