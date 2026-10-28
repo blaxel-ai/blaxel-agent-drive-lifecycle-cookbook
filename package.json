@@ -22,7 +22,7 @@
     "test:live": "RUN_BLAXEL_LIVE_TESTS=1 vitest run tests/live.test.ts"
   },
   "dependencies": {
-    "@blaxel/core": "0.3.11",
+    "@blaxel/core": "0.3.32",
     "dotenv": "^17.4.2"
   },
   "devDependencies": {
@@ -34,9 +34,8 @@
   },
   "overrides": {
     "js-yaml": "^4.3.1",
-    "toml": "4.2.0",
-    "fast-uri": "3.1.8",
-    "qs": "6.16.0"
+    "fast-uri": "3.1.9",
+    "qs": "6.16.1"
   },
   "repository": {
     "type": "git",
