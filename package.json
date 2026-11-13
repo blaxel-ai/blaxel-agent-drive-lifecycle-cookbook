@@ -22,7 +22,7 @@
     "test:live": "RUN_BLAXEL_LIVE_TESTS=1 vitest run tests/live.test.ts"
   },
   "dependencies": {
-    "@blaxel/core": "0.3.32",
+    "@blaxel/core": "0.3.39",
     "dotenv": "^17.4.2"
   },
   "devDependencies": {
